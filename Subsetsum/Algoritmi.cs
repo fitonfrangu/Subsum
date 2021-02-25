@@ -41,12 +41,9 @@ namespace Subsetsum
             }
         }
 
-        public static void printSubsetsRec(int[] arr, int i, int sum,
+        public static void printoSubShumen(int[] arr, int i, int sum,
                                      List<int> p)
         {
-            // If we reached end and sum is non-zero. We print 
-            // p[] only if arr[0] is equal to sun OR dp[0][sum] 
-            // is true. 
             if (i == 0 && sum != 0 && display[0,sum])
             {
                 p.Add(arr[i]);
@@ -55,7 +52,7 @@ namespace Subsetsum
                 return;
             }
 
-            // If sum becomes 0 
+            // Nese shuma behet 0
             if (i == 0 && sum == 0)
             {
                 Shfaq(p);
@@ -63,32 +60,26 @@ namespace Subsetsum
                 return;
             }
 
-            // If given sum can be achieved after ignoring 
-            // current element. 
             if (display[i - 1,sum])
             {
-                // Create a new vector to store path 
                 List<int> b = new List<int>();
                 b.AddRange(p);
-                printSubsetsRec(arr, i - 1, sum, b);
+                printoSubShumen(arr, i - 1, sum, b);
             }
 
-            // If given sum can be achieved after considering 
-            // current element. 
             if (sum >= arr[i] && display[i - 1, sum - arr[i]])
             {
                 p.Add(arr[i]);
-                printSubsetsRec(arr, i - 1, sum - arr[i], p);
+                printoSubShumen(arr, i - 1, sum - arr[i], p);
             }
         }
 
         // Prints all subsets of arr[0..n-1] with sum 0. 
-        public static void printAllSubsets(int[] arr, int n, int sum)
+        public static void printoGjithaShumat(int[] arr, int n, int sum)
         {
             if (n == 0 || sum < 0)
                 return;
 
-            // Sum 0 can always be achieved with 0 elements 
             int m = sum + 1;
             display = new bool[n,m];
 
@@ -97,11 +88,9 @@ namespace Subsetsum
                 display[i,0] = true;
             }
 
-            // Sum arr[0] can be achieved with single element 
             if (arr[0] <= sum)
                 display[0, arr[0]]= true;
 
-            // Fill rest of the entries in dp[][] 
             for (int i = 1; i < n; ++i)
                 for (int j = 0; j < sum + 1; ++j)
                     display[i,j] = (arr[i] <= j) ? (display[i - 1,j] ||
@@ -114,10 +103,8 @@ namespace Subsetsum
                 return;
             }
 
-            // Now recursively traverse dp[][] to find all 
-            // paths from dp[n-1][sum] 
             List<int> p = new List<int>();
-            printSubsetsRec(arr, n - 1, sum, p);
+            printoSubShumen(arr, n - 1, sum, p);
         }
     }
 }

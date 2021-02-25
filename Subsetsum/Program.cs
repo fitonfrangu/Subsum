@@ -6,10 +6,10 @@ namespace Subsetsum
     {
         static void Main(string[] args)
         {
-            int[] arr = { 7, 3, 2, 1, 5, 4, 8, 9, 10 };
+            int[] arr = { 7, 3, 2, 1, 5, 4, 8 };
             int n = arr.Length;
-            int sum = 25;
-            Algoritmi.printAllSubsets(arr, n, sum);
+            int sum = 10;
+            Algoritmi.printoGjithaShumat(arr, n, sum);
         }
     }
 }
