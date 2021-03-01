@@ -74,7 +74,6 @@ namespace Subsetsum
             }
         }
 
-        // Prints all subsets of arr[0..n-1] with sum 0. 
         public static void printoGjithaShumat(int[] arr, int n, int sum)
         {
             if (n == 0 || sum < 0)
@@ -93,18 +92,34 @@ namespace Subsetsum
 
             for (int i = 1; i < n; ++i)
                 for (int j = 0; j < sum + 1; ++j)
-                    display[i,j] = (arr[i] <= j) ? (display[i - 1,j] ||
-                                               display[i - 1, j - arr[i]])
-                                             : display[i - 1,j];
+                    display[i,j] = (arr[i] <= j) ? (display[i - 1,j] || display[i - 1, j - arr[i]]) : display[i - 1,j];
+
+            Print2DArray(display, arr);
+
             if (display[n - 1,sum] == false)
             {
-                Console.WriteLine("There are no subsets with" +
-                                                      " sum " + sum);
+                Console.WriteLine("Nuk ka nengrupe me kete shume " + sum);
                 return;
             }
 
             List<int> p = new List<int>();
+
             printoSubShumen(arr, n - 1, sum, p);
+        }
+
+
+        public static void Print2DArray<T>(T[,] matrix, int[] array)
+        {
+            for (int i = 0; i < matrix.GetLength(0); i++)
+            {
+                Console.WriteLine();
+
+                for (int j = 0; j < matrix.GetLength(1); j++)
+                {
+                    Console.Write(" " + matrix[i, j] + "\t");
+                }
+                Console.WriteLine();
+            }
         }
     }
 }
